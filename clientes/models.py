@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, IntegrityError
 
 # Create your models here.
 
