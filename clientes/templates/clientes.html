@@ -9,16 +9,16 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md card-dashboard">
+        <div onclick="exibir_form('1')" class="col-md card-dashboard">
             <p class="text-card">Adicionar clientes</p>
         </div>
 
-        <div class="col-md card-dashboard">
+        <div onclick="exibir_form('2')" class="col-md card-dashboard">
             <p class="text-card">Atualizar cliente</p>
         </div>
 
     </div>
-    <div class="adicionar-cliente">
+    <div id="adicionar-cliente" class="adicionar-cliente">
         <form action="{% url 'clientes' %}" method="POST">{% csrf_token %}
             <div class="row">
                 <div class="col-md">
@@ -61,6 +61,36 @@
             <input type="submit" value="Cadastrar" class="btn-principal">
         </form>      
     </div>
+
+    <div id="att_cliente">
+        <br>
+        <select id="cliente-select" onchange="dados_cliente()" class="form-control">
+            {% for cliente in clientes %}
+            <option value="{{cliente.id}}">{{cliente.nome}}</option>
+            {% endfor %}   
+        </select>
+        <br>
+        <hr>
+
+        <div id="form-att-cliente">
+            <p>Nome:</p>
+            <input id='nome' type="text" class="form-control">
+            <p>Sobrenome:</p>
+            <input id='sobrenome' type="text" class="form-control">
+            <p>Email:</p>
+            <input id='email' type="text" class="form-control">
+            <p>CPF:</p>
+            <input id='cpf' type="text" class="form-control">
+            <hr>
+            <h3>Carros</h3>
+
+            <div id='carros'>
+
+            </div>
+        </div>
+
+    </div>
+
 </div>
 <script src="{% static 'clientes/js/clientes.js' %}"></script>
 {% endblock %}
