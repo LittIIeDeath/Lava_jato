@@ -64,7 +64,9 @@
 
     <div id="att_cliente">
         <br>
-        <select id="cliente-select" onchange="dados_cliente()" class="form-control">
+        <p>Clientes:</p>
+        <select id="cliente-select" onchange="dados_cliente()" class="form-control">   
+            <option value=""></option>
             {% for cliente in clientes %}
             <option value="{{cliente.id}}">{{cliente.nome}}</option>
             {% endfor %}   
@@ -73,6 +75,7 @@
         <hr>
 
         <div id="form-att-cliente">
+            <input type='hidden' id='cliente_id'>
             <p>Nome:</p>
             <input id='nome' type="text" class="form-control">
             <p>Sobrenome:</p>
@@ -81,6 +84,8 @@
             <input id='email' type="text" class="form-control">
             <p>CPF:</p>
             <input id='cpf' type="text" class="form-control">
+            <br>
+            <input onclick='update_cliente()' value="salvar" type="submit" class="btn btn-success">
             <hr>
             <h3>Carros</h3>
 

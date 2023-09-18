@@ -38,9 +38,9 @@ function dados_cliente(){
     }).then(function(result){
         return result.json()
     }).then(function(data){
-        console.log(data)
-        aux = document.getElementById('form-att-cliente').style.display = 'block'
+        document.getElementById('form-att-cliente').style.display = 'block'
 
+        document.getElementById('cliente_id').value = data['cliente_id']
         document.getElementById('nome').value = data['cliente']['nome']
         document.getElementById('sobrenome').value = data['cliente']['sobrenome']
         document.getElementById('cpf').value = data['cliente']['cpf']
@@ -69,6 +69,46 @@ function dados_cliente(){
                 <a class='btn btn-danger' href='/clientes/excluir_carro/" + data['carros'][i]['id'] + "'>Excluir</a>\
             </div>\
         </div><br>"
+        }
+    })
+}
+
+function update_cliente(){
+    nome = document.getElementById('nome').value
+    sobrenome = document.getElementById('sobrenome').value
+    email = document.getElementById('email').value
+    cpf = document.getElementById('cpf').value
+    id = document.getElementById('cliente_id').value
+
+    fetch('/clientes/update_cliente/' + id, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrf_token,
+        },
+        body: JSON.stringify({
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email,
+            cpf: cpf
+        })
+    }).then(function(result){
+        return result.json()
+    }).then(function(data){
+        if(data['status'] == '200'){
+            nome = data['nome']
+            sobrenome = data['sobrenome']
+            email = data['email']
+            cpf = data['cpf']
+            console.log('Dados alterados com sucesso')
+        }else if(data['status'] == '201'){
+            console.log('cpf ja cadastrado')
+        }else if(data['status'] == '202'){
+            console.log('email ja cadastrado')
+        }else if(data['status'] == '203'){
+            console.log('email invalido')
+        }
+        else{
+            console.log('Ocorreu algum erro')
         }
     })
 }
