@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+    <link rel="stylesheet" href="{% static 'servicos/css/listar_servico.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+    <div class='container'>
+        <a href="{% url 'gerar_os' servico.identificador %}">gerar_os</a>
+        {{servico.titulo}}
+    </div>
+
+{% endblock %}
